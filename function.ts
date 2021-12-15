@@ -254,44 +254,44 @@ export const mobileFormat = (target: string | number): string => {
 };
 
 // 게임 시간 (hh : mm) Format Function
-  const onChagneInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.currentTarget.value;
-    const number_only = value.replace(/[^0-9]/gi, '');
-    let result = '';
-    if (number_only.length === 1) {
-      const possible = ['0', '1', '2'];
+export const onChagneHourMinuteFormat = (value: any) => {
+  const number_only = value.replace(/[^0-9]/gi, '');
+  let result = '';
+  if (number_only.length === 1) {
+    const possible = ['0', '1', '2'];
 
-      if (!possible.includes(number_only[0])) {
-        result = '';
-      } else {
-        result = number_only;
-      }
-    } else if (number_only.length === 2) {
-      if (number_only[0] === '2') {
-        const possible = ['0', '1', '2', '3'];
+    if (!possible.includes(number_only[0])) {
+      result = '';
+    } else {
+      result = number_only;
+    }
+  } else if (number_only.length === 2) {
+    if (number_only[0] === '2') {
+      const possible = ['0', '1', '2', '3'];
 
-        if (!possible.includes(number_only[1])) {
-          result = number_only[0];
-        } else {
-          result = number_only;
-        }
-      } else {
-        result = number_only;
-      }
-    } else if (number_only.length === 3) {
-      const possible = ['0', '1', '2', '3', '4', '5'];
-
-      if (!possible.includes(number_only[2])) {
-        result = number_only.slice(0, 2);
+      if (!possible.includes(number_only[1])) {
+        result = number_only[0];
       } else {
         result = number_only;
       }
     } else {
       result = number_only;
     }
-    result = result.slice(0, 4);
-    setStartTime(result.replace(/(\d{2})(\d{2})/, '$1:$2'));
-  };
+  } else if (number_only.length === 3) {
+    const possible = ['0', '1', '2', '3', '4', '5'];
+
+    if (!possible.includes(number_only[2])) {
+      result = number_only.slice(0, 2);
+    } else {
+      result = number_only;
+    }
+  } else {
+    result = number_only;
+  }
+  result = result.slice(0, 4).replace(/(\d{2})(\d{2})/, '$1:$2')
+  
+  return result
+};
 
   // 7일뒤 날짜 구하기
   const week = () => {
